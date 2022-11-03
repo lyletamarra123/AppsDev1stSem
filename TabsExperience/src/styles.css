@@ -1,0 +1,88 @@
+.navButton {
+  list-style-type: none;
+}
+
+.App {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  width: 85%;
+}
+
+h2 {
+  width: 80%;
+}
+
+.navDesc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+}
+
+nav {
+  align-self: flex-start;
+  height: 25%;
+  width: 25%;
+}
+
+nav ul {
+  padding: 0;
+}
+
+nav ul li {
+  padding: 0.3em;
+}
+
+nav ul li button {
+  padding: 0.3em 1.5em;
+  margin-left: 1em;
+  width: 8em;
+  border-color: transparent;
+}
+
+nav ul li button:hover {
+  border-left-color: cyan;
+  color: cyan;
+}
+
+nav ul li button:active {
+  border-left-color: cyan;
+  color: cyan;
+}
+
+.profile {
+  margin-left: 2em;
+}
+
+.profile h2 {
+  font-weight: lighter;
+}
+
+.profile h3 {
+  background-color: rgba(128, 128, 128, 0.3);
+  width: 30%;
+  text-align: center;
+}
+
+.description {
+  list-style-image: url("/img/bullet.png");
+  padding-left: 1em;
+}
+
+.moreInfo {
+  align-self: center;
+  width: 30%;
+  padding: 0.5em;
+  border-radius: 0.4em;
+  font-weight: bolder;
+  background-color: cyan;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.moreInfo:hover {
+  background-color: rgba(0, 255, 255, 0.3);
+  color: rgba(0, 0, 0, 0.8);
+}
