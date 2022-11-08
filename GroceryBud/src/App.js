@@ -17,10 +17,11 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
-      showAlert(true, 'danger', 'please enter value');
+      showAlert(true, 'danger', 'Please enter value');
     } else if (name && isEditing) {
       setList(
         list.map((item) => {
@@ -33,9 +34,9 @@ function App() {
       setName('');
       setEditID(null);
       setIsEditing(false);
-      showAlert(true, 'success', 'value changed');
+      showAlert(true, 'success', 'Value changed');
     } else {
-      showAlert(true, 'success', 'item added to the list');
+      showAlert(true, 'success', 'Item added to the list');
       const newItem = { id: new Date().getTime().toString(), title: name };
 
       setList([...list, newItem]);
@@ -47,11 +48,11 @@ function App() {
     setAlert({ show, type, msg });
   };
   const clearList = () => {
-    showAlert(true, 'danger', 'empty list');
+    showAlert(true, 'danger', 'List cleared');
     setList([]);
   };
   const removeItem = (id) => {
-    showAlert(true, 'danger', 'item removed');
+    showAlert(true, 'danger', 'Item removed');
     setList(list.filter((item) => item.id !== id));
   };
   const editItem = (id) => {
@@ -69,12 +70,12 @@ function App() {
       <form className='grocery-form' onSubmit={handleSubmit}>
         {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
 
-        <h3>grocery bud</h3>
+        <h3>GROCERY BUD</h3>
         <div className='form-control'>
           <input
             type='text'
             className='grocery'
-            placeholder='e.g. eggs'
+            placeholder='e.g Apple'
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
