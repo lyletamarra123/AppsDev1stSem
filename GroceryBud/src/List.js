@@ -9,11 +9,11 @@ const List = ({ items, removeItem, editItem }) => {
         return (
           <article className='grocery-item' key={id}>
             <p className='title'>{title}</p>
-            <div className='btn-container'>
+            <div className='btn-container'> {/* 4. Each item added to the list must have an edit and delete button */}
               <button
                 type='button'
                 className='edit-btn'
-                onClick={() => editItem(id)}
+                onClick={() => editItem(id)} //5. Clicking the edit button should automatically set the item text into the textfield so it's easier to confirm it's the right item to edit.
               >
                 <FaEdit />
               </button>

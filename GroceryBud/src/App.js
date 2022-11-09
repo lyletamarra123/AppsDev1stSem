@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import List from './List';
 import Alert from './Alert';
 
-const getLocalStorage = () => {
+// 9. Make sure the basket items are saved via browser's local storage so closing the page 
+// and running it again should still have the items visible and not start from scratch
+const getLocalStorage = () => { 
   let list = localStorage.getItem('list');
   if (list) {
     return (list = JSON.parse(localStorage.getItem('list')));
@@ -20,8 +22,10 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // 3. If user entered an empty item and presses Submit or hit enter on the text input, 
+    // an error alert message must be shown to let the user know that an input is required
     if (!name) {
-      showAlert(true, 'danger', 'Please enter value');
+      showAlert(true, 'danger', 'Please enter an Item'); 
     } else if (name && isEditing) {
       setList(
         list.map((item) => {
@@ -34,14 +38,17 @@ function App() {
       setName('');
       setEditID(null);
       setIsEditing(false);
-      showAlert(true, 'success', 'Value changed');
-    } else {
-      showAlert(true, 'success', 'Item added to the list');
+      showAlert(true, 'success', 'Item value changed');
+    } 
+    // 2. Once user submitted a new item, it should add it to the basket list and set the textfield text to empty. 
+    // An alert message to confirm that the right item is added to the basket must be shown
+    else { 
+      showAlert(true, 'success', 'Item added to the list');  
       const newItem = { id: new Date().getTime().toString(), title: name };
 
-      setList([...list, newItem]);
+      setList([...list, newItem]); 
       setName('');
-    }
+    } 
   };
 
   const showAlert = (show = false, type = '', msg = '') => {
@@ -70,8 +77,9 @@ function App() {
       <form className='grocery-form' onSubmit={handleSubmit}>
         {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
 
-        <h3>GROCERY BUD</h3>
-        <div className='form-control'>
+        <h3>GROCERY BUD</h3>  
+        <div className='form-control'> 
+        {/* 1. A text input must be provided to add new grocery item / update a grocery item into the basket */}       
           <input
             type='text'
             className='grocery'
@@ -79,16 +87,17 @@ function App() {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <button type='submit' className='submit-btn'>
-            {isEditing ? 'edit' : 'submit'}
+          <button type='submit' className='submit-btn'> 
+            {isEditing ? 'edit' : 'submit'} 
           </button>
         </div>
       </form>
       {list.length > 0 && (
         <div className='grocery-container'>
           <List items={list} removeItem={removeItem} editItem={editItem} />
-          <button className='clear-btn' onClick={clearList}>
-            clear items
+          {/* 8. A Clear Items button must be visible at the end of the list and clicking it should empty the basket */}
+          <button className='clear-btn' onClick={clearList}> 
+            Clear items
           </button>
         </div>
       )}
