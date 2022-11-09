@@ -13,7 +13,7 @@ const List = ({ items, removeItem, editItem }) => {
               <button
                 type='button'
                 className='edit-btn'
-                onClick={() => editItem(id)} //5. Clicking the edit button should automatically set the item text into the textfield so it's easier to confirm it's the right item to edit.
+                onClick={() => editItem(id)} 
               >
                 <FaEdit />
               </button>

@@ -26,7 +26,9 @@ function App() {
     // an error alert message must be shown to let the user know that an input is required
     if (!name) {
       showAlert(true, 'danger', 'Please enter an Item'); 
-    } else if (name && isEditing) {
+    } 
+    // 6. As soon as the user made some updates and clicks Edit, the basket item must be appropriately updated as well
+    else if (name && isEditing) {
       setList(
         list.map((item) => {
           if (item.id === editID) {
@@ -58,16 +60,23 @@ function App() {
     showAlert(true, 'danger', 'List cleared');
     setList([]);
   };
+
+  // 7. Clicking the delete button should remove the item from the basket 
+  // and an alert message confirming the right item was removed should be visible
   const removeItem = (id) => {
     showAlert(true, 'danger', 'Item removed');
     setList(list.filter((item) => item.id !== id));
   };
-  const editItem = (id) => {
+
+  //5. Clicking the edit button should automatically set the item text into the textfield 
+  //so it's easier to confirm it's the right item to edit.
+  const editItem = (id) => {       
     const specificItem = list.find((item) => item.id === id);
     setIsEditing(true);
     setEditID(id);
     setName(specificItem.title);
   };
+  
   useEffect(() => {
     localStorage.setItem('list', JSON.stringify(list));
   }, [list]);
