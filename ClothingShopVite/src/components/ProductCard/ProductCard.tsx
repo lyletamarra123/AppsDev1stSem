@@ -11,6 +11,7 @@ import { Product } from '../../models';
 import { useState, useEffect, useContext } from 'react';
 import { ShopContext} from '../Context/useContext';
 import {FaStar, FaRegStar, FaCartPlus, FaShoppingCart} from 'react-icons/fa';
+import { CartPlusFill, CartXFill } from "react-bootstrap-icons";
 
 export const ProductCard = ({ name, imageUrl, price,quantity }: Product) => {
   const {products, saved,removeItem,addToCart,removeToWL,addToWL} = useContext(ShopContext);
@@ -65,7 +66,7 @@ export const ProductCard = ({ name, imageUrl, price,quantity }: Product) => {
       </AddButton>
 
       <AddButtonProps2 isInCart={isInCart} onClick={handleCart}>
-        <p>{isInCart?  <FaCartPlus/> : <FaShoppingCart  />}</p>
+        <p>{isInCart?  <CartXFill/> : <CartPlusFill  />}</p>
       </AddButtonProps2>
       <TextContainer>
         <Title>{name}</Title>

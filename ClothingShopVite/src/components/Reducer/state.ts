@@ -10,8 +10,7 @@ export type ShopState = {
     addToWL: any,
     removeToWL:any,
     updatePrice: any,
-    updateCart: any,
-   
+    updateCart: any,   
 }
 
 export const initialState = {

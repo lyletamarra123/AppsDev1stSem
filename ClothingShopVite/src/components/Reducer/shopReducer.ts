@@ -40,10 +40,7 @@ export const shopReducer = (state: ShopState, action: ShopAction) => {
             return {
               ...state,
               totalitems: action.payload,
-            };
-            
-            
-           
+            };                     
     default:
       return state;
   }

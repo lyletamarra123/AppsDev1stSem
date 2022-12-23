@@ -96,4 +96,8 @@ export const PlaceOrder = styled.div`
   color : white;
   background-color: #965b3f ;
   cursor: Pointer;
+  :hover {
+    transform: scale(1.2);
+    transition: 1s;
+  }
 `;

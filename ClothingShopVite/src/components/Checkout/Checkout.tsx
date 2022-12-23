@@ -12,7 +12,7 @@ export const Checkout = () => {
   useEffect(() => {
     if (showAlert) {
       alert('Items are successfully ordered. Thank you for Shopping!');
-      window.location.reload();
+      window.location.assign("/");
     }
   }, [showAlert]);
 
