@@ -19,6 +19,13 @@ export const App = () => {
     dispatch(add(updatedCart));
   };
 
+  const addToWL = (product: Product) => {
+    const updatedCart = state.products.concat(product);
+    updatePrice(updatedCart);
+
+    dispatch(add(updatedCart));
+  };
+
   const removeItem = (product: Product) => {
     const updatedCart = state.products.filter(
       (currentProduct: Product) => currentProduct.name !== product.name
@@ -37,7 +44,9 @@ export const App = () => {
   const value = {
     total: state.total,
     products: state.products,
+    wishlist: state.products,
     addToCart,
+    addToWL,
     removeItem
   }
   return (

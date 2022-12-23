@@ -5,7 +5,7 @@ import { Product } from '../../models';
 import { ClothingShopContext} from '../../useContext';
 
 export const ProductCard = ({ name, imageUrl, price }: Product) => {
-  const {products, addToCart, addToWL, removeItem} = useContext(ClothingShopContext);
+  const {products, addToCart, addToWL, removeItem, wishlist} = useContext(ClothingShopContext);
   const [isInCart, setIsInCart] = useState(false);
   const [isInWishlist, setIsInWishlist] = useState(false);
 
@@ -20,14 +20,14 @@ export const ProductCard = ({ name, imageUrl, price }: Product) => {
   }, [products, name]);
   
   useEffect(() => {
-    const itemInWishlist = products.find((product: { name: string; }) => product.name === name);
+    const itemInWishlist = wishlist.find((product: { name: string; }) => product.name === name);
 
     if (itemInWishlist) {
       setIsInWishlist(true);
     } else {
       setIsInWishlist(false);
     }
-  }, [products, name]);
+  }, [wishlist, name]);
 
   const handleClick = () => {
     const product = {name, imageUrl, price};
@@ -41,12 +41,12 @@ export const ProductCard = ({ name, imageUrl, price }: Product) => {
   }
 
   const handleWishClick = () => {
-    const products = {name, imageUrl, price};
+    const product = {name, imageUrl, price};
     if(isInWishlist){
-      removeItem(products);
+      removeItem(product);
       setIsInWishlist(false);
     } else{
-      addToWL(products);
+      addToWL(product);
       setIsInWishlist(true);
     }
   }

@@ -2,6 +2,7 @@ import { Product } from "../models";
 
 export type ShopState = {
     products: Product[],
+    wishlist: Product[],
     total: number,
     addToCart: any,
     removeItem: any,
@@ -10,6 +11,7 @@ export type ShopState = {
 
 export const initialState = {
     products: [],
+    wishlist: [],
     total: 0,
     addToCart: null,
     removeItem: null,
