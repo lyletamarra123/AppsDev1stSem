@@ -1,2 +1,2 @@
-export * from './Wishlist.styled';
 export * from './Wishlist';
+export * from './Wishlist.styled';

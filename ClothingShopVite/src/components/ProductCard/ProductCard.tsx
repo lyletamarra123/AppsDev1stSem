@@ -1,68 +1,78 @@
-import { AddButton, SubTitle,TextContainer,Title,Wrapper,} from './ProductCard.styled';
+import {
+  AddButton,
+  AddButtonProps2,
+  SubTitle,
+  TextContainer,
+  Title,
+  Wrapper,
+} from './ProductCard.styled';
 
-import { useState, useEffect, useContext } from 'react';
 import { Product } from '../../models';
-import { ClothingShopContext} from '../../useContext';
+import { useState, useEffect, useContext } from 'react';
+import { ShopContext} from '../Context/useContext';
+import {FaStar, FaRegStar, FaCartPlus, FaShoppingCart} from 'react-icons/fa';
 
-export const ProductCard = ({ name, imageUrl, price }: Product) => {
-  const {products, addToCart, addToWL, removeItem, wishlist} = useContext(ClothingShopContext);
+export const ProductCard = ({ name, imageUrl, price,quantity }: Product) => {
+  const {products, saved,removeItem,addToCart,removeToWL,addToWL} = useContext(ShopContext);
   const [isInCart, setIsInCart] = useState(false);
-  const [isInWishlist, setIsInWishlist] = useState(false);
-
-  useEffect(() => {
-    const itemInCart = products.find((product: { name: string; }) => product.name === name);
-
-    if (itemInCart) {
-      setIsInCart(true);
-    } else {
-      setIsInCart(false);
-    }
-  }, [products, name]);
+  const [isInWish, setIsInWish] = useState(false);
   
   useEffect(() => {
-    const itemInWishlist = wishlist.find((product: { name: string; }) => product.name === name);
+    const cartItems = products.find((product: { name: string; }) => product.name === name);
+    const wishItems = saved.find((product: { name: string; }) => product.name === name);
 
-    if (itemInWishlist) {
-      setIsInWishlist(true);
-    } else {
-      setIsInWishlist(false);
+    if (cartItems && wishItems) {
+      setIsInCart(true);
+      setIsInWish(true);
+    }else if(!cartItems && wishItems){
+      setIsInCart(false);
+      setIsInWish(true);
+    }else if(cartItems && !wishItems){
+      setIsInCart(true);
+      setIsInWish(false);
+    }else {
+      setIsInCart(false);
+      setIsInWish(false);
     }
-  }, [wishlist, name]);
-
-  const handleClick = () => {
-    const product = {name, imageUrl, price};
+  }, [products, saved,name]);
+  
+  const handleCart = () => {
+    const product = {name, imageUrl, price, quantity};
     if(isInCart){
       removeItem(product);
-      setIsInCart(false);
+     
     } else{
       addToCart(product);
-      setIsInCart(true);
+      
     }
   }
 
-  const handleWishClick = () => {
-    const product = {name, imageUrl, price};
-    if(isInWishlist){
-      removeItem(product);
-      setIsInWishlist(false);
+  const handleWishList = () => {
+    const product = {name, imageUrl, price, quantity};
+    if(isInWish){
+      removeToWL(product);
+    
     } else{
       addToWL(product);
-      setIsInWishlist(true);
+     
     }
   }
 
   return (
     <Wrapper background={imageUrl}>
-      <button onClick={handleWishClick}>
-      <p>{isInWishlist? "Remove from wishlist" : "Add to wishlist"}</p>
-      </button>
-      <AddButton isInCart={isInCart} onClick={handleClick}>
-        <p>{isInCart? "-" : "+"}</p>
+      <AddButton isInWish={isInWish} onClick={handleWishList}>
+        <p>{isInWish? <FaStar/> : <FaRegStar/>}</p>
       </AddButton>
+
+      <AddButtonProps2 isInCart={isInCart} onClick={handleCart}>
+        <p>{isInCart?  <FaCartPlus/> : <FaShoppingCart  />}</p>
+      </AddButtonProps2>
       <TextContainer>
         <Title>{name}</Title>
-        <SubTitle>{price}.00$</SubTitle>
+        <SubTitle>${price}.00</SubTitle>
       </TextContainer>
     </Wrapper>
   );
 };
+
+

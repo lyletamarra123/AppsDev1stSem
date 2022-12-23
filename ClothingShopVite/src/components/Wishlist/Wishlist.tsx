@@ -1,16 +1,16 @@
 import { useContext } from "react";
-import { ClothingShopContext, } from "../../useContext/shopContext";
+import { ShopContext } from "../Context/useContext";
 import { Product } from "../../models";
 import { ProductCard } from "../ProductCard";
 import { ProductsWrapper, Title } from "./Wishlist.styled";
 
 export const Wishlist = () => {
-  const { products } = useContext(ClothingShopContext);
+  const { saved } = useContext(ShopContext);
   return (
     <>
-      <Title>You have 0 items in your wishlist.</Title>
+      <Title>You have {saved.length} {saved.length > 1 ? "items" : "item"} in your wish list</Title>
       <ProductsWrapper>
-        {products.map((product: Product, index) => (
+        {saved.map((product: Product, index) => (
           <ProductCard {...product} key={index} />
         ))}
       </ProductsWrapper>
