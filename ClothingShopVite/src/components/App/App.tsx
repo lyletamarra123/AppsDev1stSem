@@ -3,6 +3,7 @@ import { LinksWrapper, TitleWrapper, Wrapper } from "./App.styled";
 
 import { Cart } from "../Cart";
 import { Products } from "../Products";
+import { Wishlist } from "../Wishlist";
 import { ClothingShopContext } from "../../useContext";
 import { useReducer } from "react";
 import { add, initialState, remove, shopReducer, update } from "../../useReducer";
@@ -47,10 +48,12 @@ export const App = () => {
         </TitleWrapper>
         <LinksWrapper>
           <Link to="/">Home</Link>
+          <Link to="/wishlist">Wishlist</Link>
           <Link to="/cart">Cart</Link>
         </LinksWrapper>
         <Routes>
           <Route path="/" element={<Products />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </Wrapper>

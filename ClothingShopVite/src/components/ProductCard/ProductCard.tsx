@@ -5,9 +5,10 @@ import { Product } from '../../models';
 import { ClothingShopContext} from '../../useContext';
 
 export const ProductCard = ({ name, imageUrl, price }: Product) => {
-  const {products, addToCart, removeItem} = useContext(ClothingShopContext);
+  const {products, addToCart, addToWL, removeItem} = useContext(ClothingShopContext);
   const [isInCart, setIsInCart] = useState(false);
-  
+  const [isInWishlist, setIsInWishlist] = useState(false);
+
   useEffect(() => {
     const itemInCart = products.find((product: { name: string; }) => product.name === name);
 
@@ -18,6 +19,16 @@ export const ProductCard = ({ name, imageUrl, price }: Product) => {
     }
   }, [products, name]);
   
+  useEffect(() => {
+    const itemInWishlist = products.find((product: { name: string; }) => product.name === name);
+
+    if (itemInWishlist) {
+      setIsInWishlist(true);
+    } else {
+      setIsInWishlist(false);
+    }
+  }, [products, name]);
+
   const handleClick = () => {
     const product = {name, imageUrl, price};
     if(isInCart){
@@ -28,8 +39,23 @@ export const ProductCard = ({ name, imageUrl, price }: Product) => {
       setIsInCart(true);
     }
   }
+
+  const handleWishClick = () => {
+    const products = {name, imageUrl, price};
+    if(isInWishlist){
+      removeItem(products);
+      setIsInWishlist(false);
+    } else{
+      addToWL(products);
+      setIsInWishlist(true);
+    }
+  }
+
   return (
     <Wrapper background={imageUrl}>
+      <button onClick={handleWishClick}>
+      <p>{isInWishlist? "Remove from wishlist" : "Add to wishlist"}</p>
+      </button>
       <AddButton isInCart={isInCart} onClick={handleClick}>
         <p>{isInCart? "-" : "+"}</p>
       </AddButton>
